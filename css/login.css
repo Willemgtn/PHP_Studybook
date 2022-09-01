@@ -1,0 +1,22 @@
+.box-login label,
+.box-login input{
+    /* display: block;
+    text-align: center; */
+}
+.box-login .form-floating input.form-control{
+    opacity: 0.5;
+}
+.box-login{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+.box-login .box-login-center{
+    width: 300px;
+}
+.box-login h2{
+    text-align: center;
+}
+.box-login h2 > i{
+    font-size: 100px;
+}

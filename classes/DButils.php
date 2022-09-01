@@ -42,7 +42,7 @@ class DButils
                 Sql::connect()->prepare("DROP TABLE $value")->execute();
             }
         }
-        header('Location: ./');
+        header('Location: ' . HOME_URL);
     }
     static function resetDatabase()
     {
@@ -129,8 +129,7 @@ class DButils
         } else {
             // No table exists in the database, create the site's config table.
             // Before that create an admin user and then the config page.
-            echo 'No tables found in the database <br>';
-            // $sql = Sql::connect()->prepare($sqlTablesMaps['subject'])->execute();
+            // echo 'No tables found in the database <br>';
             DButils::createTable('users', self::$sqlTablesMaps['users']);
             // for now i'll create a default first user admin:admin;
             $sql = Sql::connect()->prepare('INSERT INTO users values (null,?,?,?,?)');
@@ -143,5 +142,6 @@ class DButils
             // ask the administrator for credentials to create the first users that's also admin.
 
         }
+        header('Location: ' . HOME_URL);
     }
 }

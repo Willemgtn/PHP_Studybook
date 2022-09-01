@@ -24,7 +24,7 @@
         include('./pages/topNavBar.php');
 
         echo '<hr>';
-
+        echo "Tables: <br>";
         print_r(DButils::showTables());
 
         if (!Sql::connect()) {
@@ -33,16 +33,30 @@
 
 
         echo '<hr>';
+        echo "URL: <br>";
+        print_r($_GET);
+
+        echo '<hr>';
+        echo "Session: <br><pre>";
+        print_r($_SESSION);
+        echo '</pre><hr>';
+
+        echo "Cookies: <br><pre>";
+        print_r($_COOKIE);
+        echo '</pre><hr>';
+
+
+        // if (isset($_SESSION['login'])) {
+        //     include('./pages/login.php');
+        // }
+
+        @$_GET['url'] == 'Login' ? include('./pages/login.php') : false;
+
+
 
 
 
         echo '<hr>';
-
-        // $sql = Sql::connect()->prepare('DROP TABLE toDelete');
-        // $sql->execute();
-        // $sql->debugDumpParams();
-
-
 
 
         $sqlStatements = ['CREATE TABLE `studybook`.`toDelete` 
@@ -63,6 +77,21 @@
             </div>
             <div class="col-10">
                 <p>Main</p>
+                <ul>
+                    <li>
+                        <h3>TODOs:</h3>
+                    </li>
+                    <li>User login page</li>
+                    <li>User session</li>
+
+                    <li>Subjects sidebar nav</li>
+                    <li>sections </li>
+                    <li>topics</li>
+                    <li>advanced text editor</li>
+                    <li>mobile user experience</li>
+                    <li>Topics editing </li>
+
+                </ul>
             </div>
         </div>
     </div>
