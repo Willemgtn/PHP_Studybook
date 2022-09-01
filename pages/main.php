@@ -25,98 +25,13 @@
 
         echo '<hr>';
 
-        $sqlTablesMaps = [
-            'subject' => 'CREATE TABLE `studybook`.`subject` 
-                        ( `id` INT NOT NULL AUTO_INCREMENT , 
-                        `name` VARCHAR(255) NOT NULL , 
-                        `ordem_id` INT NOT NULL , 
-                        `user_id` INT NOT NULL , 
-                        PRIMARY KEY (`id`)) 
-                        ENGINE = InnoDB; ',
-            'section' => 'CREATE TABLE `studybook`.`section` 
-                        ( `id` INT NOT NULL AUTO_INCREMENT , 
-                        `name` VARCHAR(255) NOT NULL , 
-                        `ordem_id` INT NOT NULL , 
-                        `user_id` INT NOT NULL , 
-                        `visible` INT (1) NOT NULL , 
-                        PRIMARY KEY (`id`)) 
-                        ENGINE = InnoDB; ',
-            'topic' => 'CREATE TABLE `studybook`.`topic` 
-                        ( `id` INT NOT NULL AUTO_INCREMENT , 
-                        `title` text NOT NULL , 
-                        `description` text NOT NULL , 
-                        `ordem_id` INT NOT NULL , 
-                        `user_id` INT NOT NULL , 
-                        PRIMARY KEY (`id`)) 
-                        ENGINE = InnoDB; ',
-            'users' => 'CREATE TABLE `studybook`.`users` 
-                        ( `id` INT NOT NULL AUTO_INCREMENT , 
-                        `username` VARCHAR(255) NOT NULL , 
-                        `password` VARCHAR(255) NOT NULL , 
-                        `privileges` INT(1) NOT NULL , 
-                        PRIMARY KEY (`id`)) ENGINE = InnoDB; '
-        ];
-        function createTable(string $tableName, string $describeTableQuery)
-        {
-            $sql = Sql::connect()->prepare($describeTableQuery);
-            if ($sql->execute()) {
-                echo "$tableName table created <br>";
-            } else {
-                echo "$tableName table could not be created. <br>";
-            }
-        };
+        print_r(DButils::showTables());
+
         if (!Sql::connect()) {
             echo '<hr>Failed to connect to database <hr>';
         }
-        $sql = Sql::connect()->prepare('DROP TABLE subject')->execute();
-        $sql = Sql::connect()->prepare('DROP TABLE section')->execute();
-        $sql = Sql::connect()->prepare('DROP TABLE topic')->execute();
 
-        $sql = Sql::connect()->prepare('SHOW TABLES');
-        // $sql = Sql::connect()->execute('SHOW tables');
-        // $sql->exec();
-        $sql->execute();
-        // $sql->debugDumpParams();
-        $sql = $sql->fetchAll(PDO::FETCH_NUM);
-        if ($sql) {
-            foreach ($sql as $key => $value) {
-                foreach ($value as $key2 => $value2) {
-                    $sqlData[] = $value2;
-                }
-            }
-            echo '$sqlData:   ';
-            print_r($sqlData);
-            echo '<br>';
 
-            // Create suject table if it doesn't exists.
-            if (!in_array('subject', $sqlData)) {
-
-                createTable('subject', $sqlTablesMaps['subject']);
-            }
-            // Create a section table if it doesn't exist.
-            if (!in_array('section', $sqlData)) {
-
-                createTable('section', $sqlTablesMaps['section']);
-            }
-            // Create a topic table if it doesn't exist.
-            if (!in_array('topic', $sqlData)) {
-                // echo 'Topic table does not exist in database <br>';
-                // $sql = Sql::connect()->prepare($sqlTablesMaps['topic']);
-                // if ($sql->execute()) {
-                //     echo 'Topic table created <br>';
-                // } else {
-                //     echo 'Topic table could not be created. <br>';
-                // }
-                createTable('topic', $sqlTablesMaps['topic']);
-            }
-        } else {
-            // No table exists in the database, create the site's config table.
-            echo 'No tables found in the database';
-            // $sql = Sql::connect()->prepare($sqlTablesMaps['subject'])->execute();
-            createTable('users', $sqlTablesMaps['users']);
-            // ask the administrator for credentials to create the first users that's also admin.
-
-        }
         echo '<hr>';
 
 

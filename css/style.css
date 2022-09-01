@@ -19,3 +19,7 @@ nav.navbar a.nav-link.active{
 div#main *{
     border: 1px solid black;
 }
+img.profilePicture{
+    width: 30px;
+    border-radius: 50%;
+}
