@@ -28,6 +28,7 @@ if (isset($_GET['url'])) {
                     // setcookie('remember', true, time() + (60 * 60 * 24), '/');
                     setcookie('user', $user, time() + (60 * 60 * 24), '/');
                 }
+                header('Location: ' . HOME_URL);
             } else {
                 echo 'Bad login';
             }

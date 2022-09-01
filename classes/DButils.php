@@ -36,6 +36,9 @@ class DButils
     ];
     static function newResetDatabase()
     {
+        if ($_SESSION['login']['privileges'] < 5) {
+            return false;
+        }
         $tables = self::showTables();
         if ($tables) {
             foreach ($tables as $key => $value) {
@@ -81,6 +84,9 @@ class DButils
     }
     static function createTable(string $tableName, string $describeTableQuery, bool $debugOutput = true)
     {
+        if ($_SESSION['login']['privileges'] < 5) {
+            return false;
+        }
         $sql = Sql::connect()->prepare($describeTableQuery);
         if ($sql->execute()) {
             if (!$debugOutput) {

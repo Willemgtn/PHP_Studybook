@@ -19,57 +19,24 @@
 
 <body>
 
-    <div class="phpdebug">
-        <?php
-        include('./pages/topNavBar.php');
+    <?php
 
-        echo '<hr>';
-        echo "Tables: <br>";
-        print_r(DButils::showTables());
+    include('./pages/topNavBar.php');
 
-        if (!Sql::connect()) {
-            echo '<hr>Failed to connect to database <hr>';
-        }
-
-
-        echo '<hr>';
-        echo "URL: <br>";
-        print_r($_GET);
-
-        echo '<hr>';
-        echo "Session: <br><pre>";
-        print_r($_SESSION);
-        echo '</pre><hr>';
-
-        echo "Cookies: <br><pre>";
-        print_r($_COOKIE);
-        echo '</pre><hr>';
-
-
-        // if (isset($_SESSION['login'])) {
-        //     include('./pages/login.php');
-        // }
-
-        @$_GET['url'] == 'Login' ? include('./pages/login.php') : false;
+    if (isset($_GET['url']) && $_GET['url'] == 'admin' && $_SESSION['login']['privileges'] > 4) {
+        include('admin.php');
+    }
+    @$_GET['url'] == 'Login' ? include('./pages/login.php') : false;
+    @$_GET['url'] == 'user' ? include('./pages/user.php') : false;
 
 
 
 
 
-        echo '<hr>';
+    echo '<hr>';
 
 
-        $sqlStatements = ['CREATE TABLE `studybook`.`toDelete` 
-                    ( `id` INT NOT NULL AUTO_INCREMENT , 
-                    `number` INT(15) NOT NULL , 
-                    `shorttext` VARCHAR(255) NOT NULL , 
-                    `longtext` TEXT NOT NULL , 
-                    PRIMARY KEY (`id`)) 
-                    ENGINE = InnoDB; '];
-
-
-        ?>
-    </div>
+    ?>
     <div id='main' class="container-lg">
         <div class="row">
             <div class="col-2">
