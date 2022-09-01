@@ -1,4 +1,18 @@
+*{
 
+}
 body {
     background-color: #212529 !important;
+    color: white!important;
+}
+div.phpdebug{
+    padding: 25px;
+    font-weight: bold;
+}
+
+nav.navbar a{
+    color: white;
+}
+nav.navbar a.nav-link.active{
+    color: rgba(255, 255, 255, 0.637);
 }
