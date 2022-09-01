@@ -10,9 +10,12 @@ div.phpdebug{
     font-weight: bold;
 }
 
-nav.navbar a{
+nav.navbar li.nav-item > a{
     color: white;
 }
 nav.navbar a.nav-link.active{
     color: rgba(255, 255, 255, 0.637);
+}
+div#main *{
+    border: 1px solid black;
 }
